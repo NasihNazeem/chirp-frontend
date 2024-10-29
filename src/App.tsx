@@ -25,14 +25,19 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    console.log(`${import.meta.env.VITE_BASE_URL}/users/`);
     const getUser = async () => {
       try {
         const token = await getAccessTokenSilently();
-        const response = await axios.get("http://localhost:3001/api/users/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        console.log(token);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/users/`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         dispatch(setUser(response.data));
       } catch (error) {
         console.log(error);

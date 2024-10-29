@@ -46,7 +46,7 @@ const PostMenu = ({
   const [menuOpen, setMenuOpen] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(`http://localhost:3000/post/${postId}`);
+    navigator.clipboard.writeText(`${window.location.origin}/post/${postId}`);
     setMenuOpen(false);
     dispatch(enqueueToast({ message: "Post URL copied to clipboard!" }));
   };

@@ -93,7 +93,7 @@ const ExpandedPostItem = ({ post }: ExpandedPostItemProps) => {
     const updatedExpandedPost = async () => {
       try {
         const backupFetch = await axios.get(
-          "http://localhost:3001/api/posts/fetchPost",
+          `${import.meta.env.VITE_BASE_URL}/posts/fetchPost`,
           {
             params: {
               userId: user.userId,
@@ -110,7 +110,9 @@ const ExpandedPostItem = ({ post }: ExpandedPostItemProps) => {
   }, [dispatch, user.userId, urlParams.postId]);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(`http://localhost:3000/post/${post.postId}`);
+    navigator.clipboard.writeText(
+      `${window.location.origin}/post/${post.postId}`
+    );
     dispatch(enqueueToast({ message: "Post URL copied to clipboard!" }));
   };
 
