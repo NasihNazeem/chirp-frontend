@@ -23,8 +23,6 @@ function App() {
   const userIsLoading = useAppSelector((state) => state.user.isLoading);
   const username = useAppSelector((state) => state.user.username);
   const dispatch = useAppDispatch();
-  const token = getAccessTokenSilently();
-  console.log(token);
   useEffect(() => {
     console.log(`${import.meta.env.VITE_BASE_URL}/users/`);
     const getUser = async () => {
