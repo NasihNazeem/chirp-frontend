@@ -46,6 +46,9 @@ function App() {
   }, [getAccessTokenSilently, dispatch]);
 
   if (isLoading || (isAuthenticated && userIsLoading)) {
+    console.log("loading :", isLoading);
+    console.log("authenticated:", isAuthenticated);
+    console.log("user laoding:", userIsLoading);
     return <PageLoader />;
   }
 
