@@ -42,6 +42,8 @@ function App() {
         console.log(error);
       }
     };
+    console.log("I  get here");
+
     getUser();
   }, [getAccessTokenSilently, dispatch]);
 
