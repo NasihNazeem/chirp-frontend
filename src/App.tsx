@@ -28,7 +28,7 @@ function App() {
     const getUser = async () => {
       try {
         const token = await getAccessTokenSilently();
-        console.log(token);
+        console.log("token:", token);
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/users/`,
           {
