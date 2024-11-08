@@ -27,17 +27,20 @@ function App() {
     console.log(`${import.meta.env.VITE_BASE_URL}/users/`);
     const getUser = async () => {
       try {
-        const token = await getAccessTokenSilently();
-        console.log("token:", token);
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/users/`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        dispatch(setUser(response.data));
+        if (isAuthenticated) {
+          console.log("I got into the getUser");
+          const token = await getAccessTokenSilently();
+          console.log("token:", token);
+          const response = await axios.get(
+            `${import.meta.env.VITE_BASE_URL}/users/`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          dispatch(setUser(response.data));
+        }
       } catch (error) {
         console.log(error);
       }
