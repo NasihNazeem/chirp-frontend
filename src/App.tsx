@@ -27,8 +27,8 @@ function App() {
     console.log(`${import.meta.env.VITE_BASE_URL}/users/`);
     const getUser = async () => {
       try {
+        console.log("I got into the getUser");
         if (isAuthenticated) {
-          console.log("I got into the getUser");
           const token = await getAccessTokenSilently();
           console.log("token:", token);
           const response = await axios.get(
