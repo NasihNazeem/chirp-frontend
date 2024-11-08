@@ -24,31 +24,28 @@ function App() {
   const username = useAppSelector((state) => state.user.username);
   const dispatch = useAppDispatch();
   useEffect(() => {
+    console.log(`${import.meta.env.VITE_BASE_URL}/users/`);
     const getUser = async () => {
       try {
-        if (isAuthenticated) {
-          const token = await getAccessTokenSilently();
-          console.log("token:", token);
-          const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/users/`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          dispatch(setUser(response.data));
-        }
+        const token = await getAccessTokenSilently();
+        console.log("token:", token);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/users/`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        dispatch(setUser(response.data));
       } catch (error) {
-        console.error("Failed to fetch user:", error);
+        console.log(error);
       }
     };
+    console.log("I  get here");
 
-    if (isAuthenticated && !userIsLoading) {
-      console.log("Calling getUser...");
-      getUser();
-    }
-  }, [getAccessTokenSilently, dispatch, isAuthenticated, userIsLoading]);
+    getUser();
+  }, [getAccessTokenSilently, dispatch]);
 
   if (isLoading || (isAuthenticated && userIsLoading)) {
     console.log("loading :", isLoading);
