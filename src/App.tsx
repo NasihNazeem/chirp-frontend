@@ -24,12 +24,9 @@ function App() {
   const username = useAppSelector((state) => state.user.username);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log(`${import.meta.env.VITE_BASE_URL}/users/`);
     const getUser = async () => {
       try {
-        console.log("I got into the getUser");
         const token = await getAccessTokenSilently();
-        console.log("token:", token);
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/users/`,
           {
@@ -43,15 +40,11 @@ function App() {
         console.log(error);
       }
     };
-    console.log("I  get here");
 
     getUser();
   }, [getAccessTokenSilently, dispatch, isAuthenticated]);
 
   if (isLoading || (isAuthenticated && userIsLoading)) {
-    console.log("loading :", isLoading);
-    console.log("authenticated:", isAuthenticated);
-    console.log("user laoding:", userIsLoading);
     return <PageLoader />;
   }
 
