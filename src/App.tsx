@@ -37,6 +37,7 @@ function App() {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
+              withCredentials: true,
             }
           );
           dispatch(setUser(response.data));
