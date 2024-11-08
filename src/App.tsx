@@ -28,8 +28,8 @@ function App() {
     const getUser = async () => {
       try {
         console.log("I got into the getUser");
+        const token = await getAccessTokenSilently();
         if (isAuthenticated) {
-          const token = await getAccessTokenSilently();
           console.log("token:", token);
           const response = await axios.get(
             `${import.meta.env.VITE_BASE_URL}/users/`,
@@ -48,7 +48,7 @@ function App() {
     console.log("I  get here");
 
     getUser();
-  }, [getAccessTokenSilently, dispatch]);
+  }, [getAccessTokenSilently, dispatch, isAuthenticated]);
 
   if (isLoading || (isAuthenticated && userIsLoading)) {
     console.log("loading :", isLoading);
